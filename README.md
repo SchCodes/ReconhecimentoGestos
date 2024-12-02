@@ -1,2 +1,2 @@
 # ReconhecimentoGestos
-Projeto de reconhecimento de gestos em Python utilizando webcam. O sistema identifica e interpreta gestos em tempo real, com aplicações em interfaces humanas e automação. São utilizadas bibliotecas como OpenCV e MediaPipe para processamento de imagens e detecção de gestos.
+Arquivos básicos para um projeto de captura e processamento de imagens, incluindo treinamento do modelo central e testes. O objetivo é fornecer uma base para reconhecimento de gestos utilizando Python, com suporte a webcam e bibliotecas como OpenCV para detecção e análise eficiente.
