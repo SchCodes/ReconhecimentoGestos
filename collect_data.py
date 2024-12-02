@@ -5,7 +5,7 @@ import os
 import numpy as np
 import time
 
-def collect_data(output_dir, output_dir_landmarks, class_name, num_images=100):
+def collect_data(output_dir, output_dir_landmarks, class_name, num_images=100, photos_per_second=10):
 
     cap = cv2.VideoCapture(0)
 
@@ -19,9 +19,6 @@ def collect_data(output_dir, output_dir_landmarks, class_name, num_images=100):
     captured_images = []
 
     count = 0
-
-    # Configuração de quantas fotos por segundo serão capturadas
-    photos_per_second = int(input(f'Capturar quantas imagens por segundo? '))
 
     frame_interval = 1 / photos_per_second  # Intervalo entre as capturas em segundos
 
@@ -100,6 +97,18 @@ def collect_data(output_dir, output_dir_landmarks, class_name, num_images=100):
         cv2.imwrite(img_name, img)
         print(f"Imagem salva: {img_name}")
 
-# Exemplo de uso
-class_name = "positive"
-collect_data(output_dir=f"data/raw/categorias/{class_name}", output_dir_landmarks=f"data/raw/landmarks/{class_name}", class_name= class_name, num_images=10)
+def main():
+    num_categories = int(input("Quantas categorias serão coletadas? "))
+    num_images = int(input("Quantas fotos serão para cada categoria? "))
+    photos_per_second = int(input("Quantas fotos por segundo? "))
+
+    for _ in range(num_categories):
+        class_name = input("Nome da categoria: ")
+        output_dir = f"data/raw/categorias/{class_name}"
+        output_dir_landmarks = f"data/raw/landmarks/{class_name}"
+        os.makedirs(output_dir, exist_ok=True)
+        os.makedirs(output_dir_landmarks, exist_ok=True)
+        collect_data(output_dir, output_dir_landmarks, class_name, num_images, photos_per_second)
+
+if __name__ == "__main__":
+    main()
