@@ -48,5 +48,5 @@ def detect_gestures(model):
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    model = load_model('models/cnn_model.h5')
+    model = load_model('models/cnn_model.keras')
     detect_gestures(model)
