@@ -1,6 +1,7 @@
 
 import tensorflow as tf
 from tensorflow.keras import layers, models
+import os
 
 def create_model(input_shape=(224, 224, 3), num_classes=5):
     model = models.Sequential([
@@ -18,9 +19,15 @@ def create_model(input_shape=(224, 224, 3), num_classes=5):
     return model
 
 def train_model(data_dir, model_save_path="models/cnn_model.keras"):
+    # Garantir que o diretório dos dados existe
+    os.makedirs(data_dir, exist_ok=True)
+
+    # Garantir que o diretório para salvar o modelo existe
+    os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
+    
     train_ds = tf.keras.utils.image_dataset_from_directory(data_dir, batch_size=32, image_size=(224, 224), color_mode='rgb')
     model = create_model()
-    model.fit(train_ds, epochs=10)
+    model.fit(train_ds, epochs=1)
     model.save(model_save_path)
 
 # Exemplo de uso
